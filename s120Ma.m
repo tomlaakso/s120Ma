@@ -16,7 +16,7 @@
 %%%         and the delta34S of the sample in permil in the second
 %%%         column. The full file name (including path) must
 %%%         be saved as a string in the 'nomen' variable, below:
-            nomen = '/Users/Tommy/Desktop/cenosulf/paytan.t';
+            nomen = '';
 %%% Output: d0: a vector of delta34S values of seawater sulfate
 %%%             over the simulation (permil)
 %%%         M0: a vector of the sulfate content of seawater over
