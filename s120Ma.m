@@ -95,6 +95,7 @@ Mdiv = 5;
 MA = 28/Mdiv*10^-3*10^21;  %initial steady state [S]
 bM = (Mdiv-1)*MA/120/10^6; %slope of steady-state [S] drift
 Fw = MA*Mdiv/10/10^6;      %S weathering input
+dw = 0;                    %S weathering input d34S
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Perturbation set-up %%%
@@ -158,7 +159,7 @@ d0spin = dA+bd*spint;  %steady-state d34S at each spin-up time step
 %Spin-up (Euler integration)
 for i = 1:length(spint);
     dM = Fw*(1-Mnow/M0spin(i));
-    dd = -dnow*Fw/Mnow+d0spin(i)*Fw/M0spin(i);
+    dd = (dw-dnow)*Fw/Mnow-(dw-d0spin(i))*Fw/M0spin(i);
     Mnow = Mnow+dM*dt;
     dnow = dnow+dd*dt;
 end
@@ -170,7 +171,7 @@ M = Mnow;
 d = dnow;
 for i = 1:length(t)
     dM = Fw*(1-Mnow/M0(i));
-    dd = -dnow*Fw/Mnow+d0(i)*Fw/M0(i);
+    dd = (dw-dnow)*Fw/Mnow-(dw-d0(i))*Fw/M0(i);
     pd = (pertd(i)-dnow)*pM(i)/Mnow;
     Mnow = Mnow+dM*dt+pM(i)*dt;
     dnow = dnow+dd*dt+pd(1)*dt;
